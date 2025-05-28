@@ -8,7 +8,6 @@ export function BottomNav() {
       <Link href="/" className={router.pathname === "/" ? "text-black" : "text-gray-400"}>Home</Link>
       <Link href="/explore" className={router.pathname === "/explore" ? "text-black" : "text-gray-400"}>Explore</Link>
       <Link href="/saved" className={router.pathname === "/saved" ? "text-black" : "text-gray-400"}>Saved</Link>
-      <Link href="/profile" className={router.pathname === "/profile" ? "text-black" : "text-gray-400"}>Profile</Link>
     </nav>
   );
 }
