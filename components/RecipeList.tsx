@@ -1,4 +1,6 @@
 import React from "react";
+import RecipeGridList from "./RecipeGridList";
+import type { RecipeGridListItem } from "./RecipeGridList";
 
 export interface RecipeListItem {
   title: string;
@@ -12,24 +14,39 @@ interface RecipeListProps {
   recipes: RecipeListItem[];
 }
 
-export const RecipeList: React.FC<RecipeListProps> = ({ recipes }) => (
-  <div>
-    {recipes.map((r) => (
-      <div key={r.title} className="flex items-center gap-4 py-3 border-b last:border-b-0">
-        <div className="w-16 h-16 rounded bg-gray-200" />
-        <div className="flex-1">
-          <div className="font-medium text-sm">{r.title}</div>
-          <div className="text-xs text-[#886364]">
-            {r.desc}
-            {r.time && r.servings ? (
-              <>
-                <span> • {r.time}</span>
-                <span> • {r.servings}</span>
-              </>
-            ) : null}
-          </div>
-        </div>
-      </div>
-    ))}
-  </div>
-);
+// Example mock data
+const mockRecipes: RecipeListItem[] = [
+  {
+    title: "Spaghetti Carbonara",
+    desc: "Classic Italian pasta dish.",
+    img: "https://via.placeholder.com/150",
+    time: "25 min",
+    servings: "2 servings",
+  },
+  {
+    title: "Pancakes",
+    desc: "Fluffy and delicious breakfast.",
+    img: "",
+    time: "15 min",
+    servings: "4 servings",
+  },
+  {
+    title: "Caesar Salad",
+    desc: "Crisp romaine with creamy dressing.",
+    img: "https://via.placeholder.com/150",
+    time: "10 min",
+    servings: "1 serving",
+  },
+];
+
+export const RecipeList: React.FC = () => {
+  // Adapt mock data to RecipeGridListItem (id required)
+  const gridData: RecipeGridListItem[] = mockRecipes.map((r, i) => ({
+    id: r.title + i,
+    title: r.title,
+    desc: r.desc,
+    img: r.img,
+  }));
+  return <RecipeGridList data={gridData} variant="list" />;
+};
+;
