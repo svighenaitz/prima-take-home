@@ -5,11 +5,17 @@ const compat = new FlatCompat({
   baseDirectory: import.meta.dirname,
 });
 
+// Get the Next.js and jsx-a11y ESLint configurations
+const nextConfig = compat.extends("next/core-web-vitals");
+const jsxA11yConfig = compat.extends("plugin:jsx-a11y/recommended");
+
 export default tseslint.config(
   {
     ignores: [".next"],
   },
-  ...compat.extends("next/core-web-vitals"),
+  // Properly spread the Next.js and jsx-a11y configurations
+  ...(nextConfig || []),
+  ...(jsxA11yConfig || []),
   {
     files: ["**/*.ts", "**/*.tsx"],
     extends: [
