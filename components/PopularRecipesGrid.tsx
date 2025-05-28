@@ -5,9 +5,10 @@ import useLocalStorageQuery from "../hooks/useLocalStorageQuery";
 export interface PopularRecipesGridProps {
   query: string;
   scrollSnap?: boolean;
+  limit?: number;
 }
 
-const PopularRecipesGrid: React.FC<PopularRecipesGridProps> = ({ query, scrollSnap = false }) => {
+const PopularRecipesGrid: React.FC<PopularRecipesGridProps> = ({ query, scrollSnap = false, limit = 6 }) => {
   const url = `https://www.themealdb.com/api/json/v1/1/filter.php?a=${encodeURIComponent(query)}`;
   const key = `popular-${query.toLowerCase()}`;
   const { data, isLoading, error } = useLocalStorageQuery<MealsResponse>(
@@ -22,7 +23,7 @@ const PopularRecipesGrid: React.FC<PopularRecipesGridProps> = ({ query, scrollSn
   if (scrollSnap) {
     return (
       <div className="flex overflow-x-auto gap-3 mb-4 snap-x snap-mandatory">
-        {data?.meals?.map((meal: MealsResponse["meals"][number]) => (
+        {data?.meals?.slice(0, limit).map((meal: MealsResponse["meals"][number]) => (
           <div
             key={meal.idMeal}
             className="flex-shrink-0 w-1/2 flex flex-col snap-center"
@@ -51,7 +52,7 @@ const PopularRecipesGrid: React.FC<PopularRecipesGridProps> = ({ query, scrollSn
   }
   return (
     <div className="grid grid-cols-2 gap-3 mb-4">
-      {data?.meals?.map((meal: MealsResponse["meals"][number]) => (
+      {data?.meals?.slice(0, limit).map((meal: MealsResponse["meals"][number]) => (
         <div key={meal.idMeal} className="flex flex-col">
           {meal.strMealThumb ? (
             <img
