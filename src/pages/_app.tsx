@@ -3,16 +3,27 @@ import { Geist } from "next/font/google";
 
 import { api } from "@/utils/api";
 
-import "@/styles/globals.css";
-import { BottomNav } from "components/navigation/BottomNav";
+import { Noto_Sans, Public_Sans } from 'next/font/google';
+import '@/styles/globals.css';
+import { BottomNav } from 'components/navigation/BottomNav';
 
-const geist = Geist({
-  subsets: ["latin"],
+const notoSans = Noto_Sans({
+  weight: ['400', '500', '700', '900'],
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-noto-sans',
+});
+
+const publicSans = Public_Sans({
+  weight: ['400', '500', '700', '900'],
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-public-sans',
 });
 
 const MyApp: AppType = ({ Component, pageProps }) => {
   return (
-    <div className={geist.className}>
+    <div className={`${notoSans.variable} ${publicSans.variable} ${notoSans.className}`}>
       <Component {...pageProps} />
       <BottomNav />
     </div>

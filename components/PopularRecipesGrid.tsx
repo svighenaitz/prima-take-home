@@ -21,13 +21,24 @@ const PopularRecipesGrid: React.FC<PopularRecipesGridProps> = ({ query }) => {
   return (
     <div className="grid grid-cols-2 gap-3 mb-4">
       {data?.meals?.map((meal: MealsResponse["meals"][number]) => (
-        <div key={meal.idMeal} className="bg-white rounded-lg shadow p-2 flex flex-col items-center">
+        <div key={meal.idMeal} className="flex flex-col">
           {meal.strMealThumb ? (
-            <img src={meal.strMealThumb} alt={meal.strMeal} className="w-20 h-20 object-cover rounded mb-2" />
+            <img
+              src={meal.strMealThumb + '/small'}
+              srcSet={[
+                `${meal.strMealThumb}/small 400w`,
+                `${meal.strMealThumb}/medium 800w`,
+                `${meal.strMealThumb}/large 1200w`
+              ].join(', ')}
+              sizes="50vw"
+              alt={meal.strMeal}
+              className="w-full aspect-square object-cover mb-1 rounded-2xl"
+              style={{ display: 'block' }}
+            />
           ) : (
-            <div className="w-20 h-20 bg-gray-200 rounded mb-2" />
+            <div className="w-full aspect-square bg-gray-200 mb-1 rounded-2xl" />
           )}
-          <div className="font-medium text-sm text-center">{meal.strMeal}</div>
+          <div className="font-medium text-sm text-left w-full truncate">{meal.strMeal}</div>
         </div>
       ))}
     </div>

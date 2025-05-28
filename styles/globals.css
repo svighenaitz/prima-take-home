@@ -1,0 +1,7 @@
+html {
+  font-family: var(--font-noto-sans), Arial, sans-serif;
+}
+
+.public-sans {
+  font-family: var(--font-public-sans), Arial, sans-serif;
+}
