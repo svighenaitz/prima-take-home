@@ -14,7 +14,12 @@
     "preview": "next build && next start",
     "start": "next start",
     "typecheck": "tsc --noEmit",
-  "test": "vitest run"
+    "test": "vitest run",
+    "test:ui": "vitest --ui",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui",
+    "playwright:install": "playwright install",
+    "postinstall": "bun run playwright:install"
   },
   "dependencies": {
     "@t3-oss/env-nextjs": "^0.12.0",
@@ -31,6 +36,7 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.1",
+    "@playwright/test": "^1.52.0",
     "@tailwindcss/postcss": "^4.0.15",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.3.0",
@@ -45,6 +51,7 @@
     "eslint-config-next": "^15.2.3",
     "eslint-plugin-jsx-a11y": "^6.10.2",
     "jsdom": "^26.1.0",
+    "playwright": "^1.52.0",
     "postcss": "^8.5.3",
     "prettier": "^3.5.3",
     "prettier-plugin-tailwindcss": "^0.6.11",
