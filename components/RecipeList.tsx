@@ -39,14 +39,27 @@ const mockRecipes: RecipeListItem[] = [
   },
 ];
 
+import useLocalStorageQuery from "../hooks/useLocalStorageQuery";
+
 export const RecipeList: React.FC = () => {
-  // Adapt mock data to RecipeGridListItem (id required)
-  const gridData: RecipeGridListItem[] = mockRecipes.map((r, i) => ({
-    id: r.title + i,
-    title: r.title,
-    desc: r.desc,
-    img: r.img,
-  }));
+  // Fetch recipes from TheMealDB API and cache in localStorage
+  const { data, isLoading, error } = useLocalStorageQuery<any>(
+    "themealdb-search-all",
+    "https://www.themealdb.com/api/json/v1/1/search.php?s=",
+    1000 * 60 * 60 // 1 hour
+  );
+
+  let gridData: RecipeGridListItem[] = [];
+  if (data && data.meals) {
+    gridData = data.meals.map((meal: any) => ({
+      id: meal.idMeal,
+      title: meal.strMeal,
+      desc: meal.strInstructions?.slice(0, 60) + "...",
+      img: meal.strMealThumb,
+    }));
+  }
+
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>Error loading recipes.</div>;
   return <RecipeGridList data={gridData} variant="list" />;
 };
-;
