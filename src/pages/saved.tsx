@@ -1,4 +1,5 @@
 import React from 'react';
+import PageHeader from "components/PageHeader";
 
 import Head from "next/head";
 import { RecipeList } from "components/RecipeList";
@@ -18,11 +19,7 @@ export default function Saved() {
         <title>Saved Recipes</title>
       </Head>
       <div className="min-h-screen flex flex-col bg-[#faf7f6] pb-16">
-        <header className="p-4 flex items-center font-bold text-lg">
-          <span className="material-icons">arrow_back</span>
-          <span className="flex-1 text-center">Saved</span>
-          <span className="material-icons">menu</span>
-        </header>
+      <PageHeader>Saved</PageHeader>
         <div className="px-4">
           <RecipeList recipes={savedRecipes.map(r => ({
             ...r,
