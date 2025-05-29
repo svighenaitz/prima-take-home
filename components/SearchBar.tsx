@@ -12,7 +12,6 @@ export const SearchBar: React.FC<SearchBarProps> = ({ value: propValue = "", onC
   const [value, setValue] = React.useState(propValue);
   const router = useRouter();
   const isExplore = router.pathname === "/explore";
-  const debounceRef = React.useRef<NodeJS.Timeout | null>(null);
   const inputRef = React.useRef<HTMLInputElement>(null);
 
   React.useEffect(() => {
@@ -29,16 +28,13 @@ export const SearchBar: React.FC<SearchBarProps> = ({ value: propValue = "", onC
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value);
+    const input = e.target.value;
+    if (!isExplore && input.length >= 3) {
+      router.push(`/explore?query=${encodeURIComponent(input)}`);
+      return;
+    }
     if (isExplore) {
       onChange?.(e);
-    } else {
-      if (debounceRef.current) clearTimeout(debounceRef.current);
-      const input = e.target.value;
-      debounceRef.current = setTimeout(() => {
-        if (input.length >= 3) {
-          router.push(`/explore?query=${encodeURIComponent(input)}`);
-        }
-      }, 1000);
     }
   };
 

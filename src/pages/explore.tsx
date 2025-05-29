@@ -28,7 +28,7 @@ export default function Explore() {
         <PageHeader>Explore</PageHeader>
         <div className="px-4">
           <SearchBar value={queryValue} onChange={handleSearchChange} placeholder="Search for recipes" autoFocus={!!queryValue} />
-          <RecipeList />
+          <RecipeList query={queryValue} />
         </div>
       </div>
     </>

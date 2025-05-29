@@ -1,3 +1,4 @@
+import useLocalStorageQuery from "../hooks/useLocalStorageQuery";
 import React from "react";
 import RecipeGridList from "./RecipeGridList";
 import type { RecipeGridListItem } from "./RecipeGridList";
@@ -10,42 +11,11 @@ export interface RecipeListItem {
   servings?: string;
 }
 
-interface RecipeListProps {
-  recipes: RecipeListItem[];
-}
-
-// Example mock data
-const mockRecipes: RecipeListItem[] = [
-  {
-    title: "Spaghetti Carbonara",
-    desc: "Classic Italian pasta dish.",
-    img: "https://via.placeholder.com/150",
-    time: "25 min",
-    servings: "2 servings",
-  },
-  {
-    title: "Pancakes",
-    desc: "Fluffy and delicious breakfast.",
-    img: "",
-    time: "15 min",
-    servings: "4 servings",
-  },
-  {
-    title: "Caesar Salad",
-    desc: "Crisp romaine with creamy dressing.",
-    img: "https://via.placeholder.com/150",
-    time: "10 min",
-    servings: "1 serving",
-  },
-];
-
-import useLocalStorageQuery from "../hooks/useLocalStorageQuery";
-
-export const RecipeList: React.FC = () => {
+export const RecipeList: React.FC<{ query: string }> = ({ query }) => {
   // Fetch recipes from TheMealDB API and cache in localStorage
   const { data, isLoading, error } = useLocalStorageQuery<any>(
-    "themealdb-search-all",
-    "https://www.themealdb.com/api/json/v1/1/search.php?s=",
+    `themealdb-search-all-${query}`,
+    `https://www.themealdb.com/api/json/v1/1/search.php?s=${encodeURIComponent(query)}`,
     1000 * 60 * 60 // 1 hour
   );
 

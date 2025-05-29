@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 
-function useLocalStorageQuery<T>(key: string, url: string, staleTime: number) {
+function useLocalStorageQuery<T>(key: string, url: string, staleTime?: number) {
   return useQuery<T>({
     queryKey: [key],
     queryFn: async () => {
