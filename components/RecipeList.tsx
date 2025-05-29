@@ -11,7 +11,7 @@ export interface RecipeListItem {
   servings?: string;
 }
 
-export const RecipeList: React.FC<{ query: string }> = ({ query }) => {
+export const RecipeList: React.FC<{ query: string; forceLoading?: boolean }> = ({ query, forceLoading }) => {
   const limit = 6;
   // Fetch recipes from TheMealDB API and cache in localStorage
   const { data, isLoading, error } = useLocalStorageQuery<any>(
@@ -30,7 +30,7 @@ export const RecipeList: React.FC<{ query: string }> = ({ query }) => {
     }));
   }
 
-  if (isLoading) {
+  if (isLoading || forceLoading) {
     // Show 6 skeleton items
     const skeletons: RecipeGridListItem[] = Array.from({ length : limit }, (_, i) => ({
       id: `skeleton-${i}`,

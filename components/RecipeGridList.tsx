@@ -30,11 +30,19 @@ const RecipeGridList: React.FC<RecipeGridListProps> = ({ data, scrollSnap = fals
                 style={{ display: 'block' }}
               />
             ) : (
-              <div className="w-20 h-16 rounded-2xl bg-gray-200" />
+              <div className="w-20 h-16 rounded-2xl bg-gray-200 animate-pulse" />
             )}
             <div className="flex-1 min-w-0">
-              <div className="font-medium text-sm truncate">{item.title}</div>
-              <div className="text-xs text-[#886364] truncate">{item.desc}</div>
+              {item.title ? (
+                <div className="font-medium text-sm truncate">{item.title}</div>
+              ) : (
+                <div className="h-4 w-32 bg-gray-200 rounded animate-pulse mb-1" />
+              )}
+              {item.desc ? (
+                <div className="text-xs text-[#886364] truncate">{item.desc}</div>
+              ) : (
+                <div className="h-3 w-48 bg-gray-100 rounded animate-pulse" />
+              )}
             </div>
           </div>
         ))}
