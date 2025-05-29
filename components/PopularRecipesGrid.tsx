@@ -18,7 +18,17 @@ const PopularRecipesGrid: React.FC<PopularRecipesGridProps> = ({ query, scrollSn
     1000 * 60 * 60 * 24 // 24 hours
   );
 
-  if (isLoading) return <div className="mb-4">Loading...</div>;
+  if (isLoading) return <RecipeGridList
+    data={Array.from({ length: limit }, (_, i) => ({
+      id: `skeleton-${i}`,
+      title: "",
+      desc: "",
+      img: ""
+    }))}
+    scrollSnap={scrollSnap}
+    limit={limit}
+    isLoading
+  />;
   if (error) return <div className="mb-4 text-red-500">Error loading recipes</div>;
 
   const gridData = data?.meals?.map((meal) => ({

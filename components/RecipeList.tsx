@@ -33,13 +33,12 @@ export const RecipeList: React.FC<{ query: string; forceLoading?: boolean }> = (
 
   if (isLoading || forceLoading) {
     // Show 6 skeleton items
-    const skeletons: RecipeGridListItem[] = Array.from({ length : limit }, (_, i) => ({
+    return <RecipeGridList data={Array.from({ length: limit }, (_, i) => ({
       id: `skeleton-${i}`,
       title: "",
       desc: "",
       img: ""
-    }));
-    return <RecipeGridList data={skeletons} limit={limit} variant="list" />;
+    }))} variant="list" limit={limit} isLoading />;
   }
   if (error) return <div>Error loading recipes.</div>;
   return <RecipeGridList data={gridData} variant="list" limit={limit} />;

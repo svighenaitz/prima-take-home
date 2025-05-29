@@ -14,9 +14,10 @@ export interface RecipeGridListProps {
   scrollSnap?: boolean;
   limit?: number;
   variant?: 'grid' | 'list';
+  isLoading?: boolean;
 }
 
-const RecipeGridList: React.FC<RecipeGridListProps> = ({ data, scrollSnap = false, limit = 6, variant = 'grid' }) => {
+const RecipeGridList: React.FC<RecipeGridListProps> = ({ data, scrollSnap = false, limit = 6, variant = 'grid', isLoading = false }) => {
   const items = data.slice(0, limit);
   
   if (variant === 'list') {
@@ -29,7 +30,13 @@ const RecipeGridList: React.FC<RecipeGridListProps> = ({ data, scrollSnap = fals
               className="flex items-center gap-4 py-3 hover:bg-gray-50 rounded-lg cursor-pointer transition-colors"
               aria-labelledby={`list-recipe-title-${item.id}`}
             >
-              {item.img ? (
+              {isLoading ? (
+                <div 
+                  className="w-20 h-16 rounded-2xl bg-gray-200 animate-pulse" 
+                  role="img" 
+                  aria-label="Loading recipe image"
+                />
+              ) : item.img ? (
                 <img
                   src={item.img}
                   alt={`Recipe for ${item.title}`}
@@ -39,32 +46,33 @@ const RecipeGridList: React.FC<RecipeGridListProps> = ({ data, scrollSnap = fals
                 />
               ) : (
                 <div 
-                  className="w-20 h-16 rounded-2xl bg-gray-200 animate-pulse" 
+                  className="w-20 h-16 rounded-2xl bg-gray-200" 
                   role="img" 
                   aria-label="Recipe image placeholder"
                 />
               )}
               <div className="flex-1 min-w-0">
-                {item.title ? (
-                  <h3 
-                    id={`list-recipe-title-${item.id}`}
-                    className="font-medium text-sm truncate"
-                  >
-                    {item.title}
-                  </h3>
+                {isLoading ? (
+                  <>
+                    <div 
+                      className="h-4 w-32 bg-gray-200 rounded animate-pulse mb-1" 
+                      aria-hidden="true"
+                    />
+                    <div 
+                      className="h-3 w-48 bg-gray-100 rounded animate-pulse" 
+                      aria-hidden="true"
+                    />
+                  </>
                 ) : (
-                  <div 
-                    className="h-4 w-32 bg-gray-200 rounded animate-pulse mb-1" 
-                    aria-hidden="true"
-                  />
-                )}
-                {item.desc ? (
-                  <p className="text-xs text-[#4A4142] truncate">{item.desc}</p>
-                ) : (
-                  <div 
-                    className="h-3 w-48 bg-gray-100 rounded animate-pulse" 
-                    aria-hidden="true"
-                  />
+                  <>
+                    <h3 
+                      id={`list-recipe-title-${item.id}`}
+                      className="font-medium text-sm truncate"
+                    >
+                      {item.title}
+                    </h3>
+                    <p className="text-xs text-[#4A4142] truncate">{item.desc}</p>
+                  </>
                 )}
               </div>
             </Link>
@@ -106,6 +114,7 @@ const RecipeGridList: React.FC<RecipeGridListProps> = ({ data, scrollSnap = fals
             desc={item.desc}
             img={item.img}
             className={itemClass + " w-full h-full"}
+            isLoading={isLoading}
           />          
         </Link>
       ))}
