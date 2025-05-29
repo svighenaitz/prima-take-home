@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 import RecipeGridItem from "./RecipeGridItem";
 
 export interface RecipeGridListItem {
@@ -21,8 +22,9 @@ const RecipeGridList: React.FC<RecipeGridListProps> = ({ data, scrollSnap = fals
     return (
       <div>
         {items.map((item) => (
-          <div key={item.id} className="flex items-center gap-4 py-3">
-            {item.img ? (
+          <Link href={`/explore/id/${item.id}`} key={item.id} legacyBehavior>
+            <a className="flex items-center gap-4 py-3 hover:bg-gray-50 rounded-lg cursor-pointer transition-colors">
+              {item.img ? (
               <img
                 src={item.img}
                 alt={item.title}
@@ -44,35 +46,31 @@ const RecipeGridList: React.FC<RecipeGridListProps> = ({ data, scrollSnap = fals
                 <div className="h-3 w-48 bg-gray-100 rounded animate-pulse" />
               )}
             </div>
-          </div>
-        ))}
+            </a>
+          </Link>
+        ))} 
       </div>
     );
   }
-  if (scrollSnap) {
-    return (
-      <div className="flex overflow-x-auto gap-3 mb-4 snap-x snap-mandatory">
-        {items.map((item) => (
-          <RecipeGridItem
-            key={item.id}
-            title={item.title}
-            desc={item.desc}
-            img={item.img}
-            className="flex-shrink-0 w-1/2 snap-center"
-          />
-        ))}
-      </div>
-    );
-  }
+  // Unify grid and scrollSnap rendering
+  const containerClass = scrollSnap
+    ? "flex overflow-x-auto gap-3 mb-4 snap-x snap-mandatory"
+    : "grid grid-cols-2 gap-3 mb-4";
+  const itemClass = scrollSnap ? "flex-shrink-0 w-1/2 snap-center" : "";
+
   return (
-    <div className="grid grid-cols-2 gap-3 mb-4">
+    <div className={containerClass}>
       {items.map((item) => (
-        <RecipeGridItem
-          key={item.id}
-          title={item.title}
-          desc={item.desc}
-          img={item.img}
-        />
+        <Link href={`/explore/id/${item.id}`} key={item.id} legacyBehavior>
+          <a className="block hover:bg-gray-50 rounded-2xl cursor-pointer transition-colors">
+            <RecipeGridItem
+              title={item.title}
+              desc={item.desc}
+              img={item.img}
+              className={itemClass}
+            />
+          </a>
+        </Link>
       ))}
     </div>
   );

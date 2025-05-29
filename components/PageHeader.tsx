@@ -23,7 +23,7 @@ const PageHeader: React.FC<PageHeaderProps> = ({ children, className, showBack =
           </svg>
         </button>
       )}
-      <div className="flex-1 text-center">{children}</div>
+      <div className="flex-1 text-center px-12">{children}</div>
     </header>
   );
 };
