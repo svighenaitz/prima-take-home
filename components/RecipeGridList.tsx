@@ -56,20 +56,21 @@ const RecipeGridList: React.FC<RecipeGridListProps> = ({ data, scrollSnap = fals
   const containerClass = scrollSnap
     ? "flex overflow-x-auto gap-3 mb-4 snap-x snap-mandatory"
     : "grid grid-cols-2 gap-3 mb-4";
-  const itemClass = scrollSnap ? "flex-shrink-0 w-1/2 snap-center" : "";
+  // Use fixed width for scrollSnap items to ensure consistent sizing
+  const itemClass = scrollSnap
+    ? "flex-shrink-0 snap-center min-w-[50vw] sm:min-w-[16rem]"
+    : "";
 
   return (
     <div className={containerClass}>
       {items.map((item) => (
-        <Link href={`/explore/id/${item.id}`} key={item.id} legacyBehavior>
-          <a className="block hover:bg-gray-50 rounded-2xl cursor-pointer transition-colors">
+        <Link href={`/explore/id/${item.id}`} key={item.id} >
             <RecipeGridItem
               title={item.title}
               desc={item.desc}
               img={item.img}
-              className={itemClass}
-            />
-          </a>
+              className={itemClass + " w-full h-full"}
+            />          
         </Link>
       ))}
     </div>
