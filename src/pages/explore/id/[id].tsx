@@ -21,7 +21,7 @@ export default function MealDetail() {
       <Head>
         <title>{meal ? meal.strMeal : "Loading..."}</title>
       </Head>
-      <PageHeader showBack>{meal ? meal.strMeal : "Loading..."}</PageHeader>
+      <PageHeader showBack showStar>{meal ? meal.strMeal : "Loading..."}</PageHeader>
       <div className="min-h-screen bg-[#faf7f6] pb-16">
         {isLoading || !meal ? (
           <div className="p-6">Loading...</div>
