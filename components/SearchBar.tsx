@@ -30,7 +30,8 @@ export const SearchBar: React.FC<SearchBarProps> = ({ value: propValue = "", onC
     setValue(e.target.value);
     const input = e.target.value;
     if (!isExplore && input.length >= 3) {
-      router.push(`/explore?query=${encodeURIComponent(input)}`);
+      // Use void operator to explicitly ignore the promise
+      void router.push(`/explore?query=${encodeURIComponent(input)}`);
       return;
     }
     if (isExplore) {

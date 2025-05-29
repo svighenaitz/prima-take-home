@@ -9,7 +9,7 @@ interface StarToggleProps {
 
 const StarToggle: React.FC<StarToggleProps> = ({ filled, initialFilled = false, onToggle, className }) => {
   const [internalFilled, setInternalFilled] = useState(initialFilled);
-  const isFilled = filled !== undefined ? filled : internalFilled;
+  const isFilled = filled ?? internalFilled;
 
   const handleClick = () => {
     if (filled === undefined) {

@@ -5,6 +5,7 @@ import StarToggle from "components/StarToggle";
 import { useEffect, useState } from "react";
 import useLocalStorageQuery from "hooks/useLocalStorageQuery";
 import PageHeader from "components/PageHeader";
+import type { Meal, MealsResponse } from "types";
 
 export default function MealDetail() {
   const router = useRouter();
@@ -12,7 +13,7 @@ export default function MealDetail() {
   const mealId = typeof id === "string" ? id : "";
   const [isSaved, setIsSaved] = useState(false);
 
-  const { data, isLoading, error } = useLocalStorageQuery<any>(
+  const { data, isLoading, error } = useLocalStorageQuery<MealsResponse>(
     `themealdb-meal-${mealId}`,
     `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${mealId}`,
     1000 * 60 * 60 // 1 hour
@@ -21,23 +22,23 @@ export default function MealDetail() {
 
   useEffect(() => {
     if (!mealId || !meal) return;
-    const savedMeals = JSON.parse(localStorage.getItem("savedMeals") || "[]");
-    setIsSaved(savedMeals.some((m: any) => m.idMeal === mealId));
+    const savedMeals = JSON.parse(localStorage.getItem("savedMeals") ?? "[]") as Meal[];
+    setIsSaved(savedMeals.some((m: Meal) => m.idMeal === mealId));
   }, [mealId, meal]);
 
   const handleToggleSaved = (filled: boolean) => {
-    const savedMeals = JSON.parse(localStorage.getItem("savedMeals") || "[]");
+    const savedMeals = JSON.parse(localStorage.getItem("savedMeals") ?? "[]") as Meal[];
     let updated;
     if (filled) {
       // Add full meal object if not present
-      if (!savedMeals.some((m: any) => m.idMeal === mealId)) {
+      if (!savedMeals.some((m: Meal) => m.idMeal === mealId)) {
         updated = [...savedMeals, meal];
       } else {
         updated = savedMeals;
       }
     } else {
       // Remove by id
-      updated = savedMeals.filter((m: any) => m.idMeal !== mealId);
+      updated = savedMeals.filter((m: Meal) => m.idMeal !== mealId);
     }
     localStorage.setItem("savedMeals", JSON.stringify(updated));
     setIsSaved(filled);
@@ -81,9 +82,9 @@ export default function MealDetail() {
             <h2 className="text-lg font-semibold mb-2">Ingredients</h2>
             <ul className="mb-4 grid grid-cols-2 gap-2">
               {Array.from({ length: 20 }, (_, i) => {
-                const ingredient = meal[`strIngredient${i+1}`];
-                const measure = meal[`strMeasure${i+1}`];
-                if (ingredient && ingredient.trim()) {
+                const ingredient = meal[`strIngredient${i+1}` as keyof Meal];
+                const measure = meal[`strMeasure${i+1}` as keyof Meal];
+                if (ingredient?.trim()) {
                   return (
                     <li key={i} className="text-sm text-[#886364] flex gap-2">
                       <span className="font-medium text-black">{ingredient}</span>

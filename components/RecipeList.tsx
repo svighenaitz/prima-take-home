@@ -2,6 +2,7 @@ import useLocalStorageQuery from "../hooks/useLocalStorageQuery";
 import React from "react";
 import RecipeGridList from "./RecipeGridList";
 import type { RecipeGridListItem } from "./RecipeGridList";
+import type { Meal, MealsResponse } from "types";
 
 export interface RecipeListItem {
   title: string;
@@ -14,15 +15,15 @@ export interface RecipeListItem {
 export const RecipeList: React.FC<{ query: string; forceLoading?: boolean }> = ({ query, forceLoading }) => {
   const limit = 6;
   // Fetch recipes from TheMealDB API and cache in localStorage
-  const { data, isLoading, error } = useLocalStorageQuery<any>(
+  const { data, isLoading, error } = useLocalStorageQuery<MealsResponse>(
     `themealdb-search-all-${query}`,
     `https://www.themealdb.com/api/json/v1/1/search.php?s=${encodeURIComponent(query)}`,
     1000 * 60 * 60 // 1 hour
   );
 
   let gridData: RecipeGridListItem[] = [];
-  if (data && data.meals) {
-    gridData = data.meals.map((meal: any) => ({
+  if (data?.meals) {
+    gridData = data.meals.map((meal: Meal) => ({
       id: meal.idMeal,
       title: meal.strMeal,
       desc: meal.strInstructions?.slice(0, 60) + "...",
