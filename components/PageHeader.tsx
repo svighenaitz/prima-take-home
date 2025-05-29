@@ -7,10 +7,10 @@ interface PageHeaderProps {
   children: React.ReactNode;
   className?: string;
   showBack?: boolean;
-  showStar?: boolean;
+  rightElement?: React.ReactNode;
 }
 
-const PageHeader: React.FC<PageHeaderProps> = ({ children, className, showBack = false, showStar = false }) => {
+const PageHeader: React.FC<PageHeaderProps> = ({ children, className, showBack = false, rightElement }) => {
   const router = useRouter();
   return (
     <header className={`relative flex items-center p-4 font-medium text-lg ${className ?? ""}`.trim()}>
@@ -29,10 +29,10 @@ const PageHeader: React.FC<PageHeaderProps> = ({ children, className, showBack =
       )}
       {/* Center: Title */}
       <div className="flex-1 text-center px-12">{children}</div>
-      {/* Right: Star */}
-      {showStar && (
+      {/* Right: Custom Element */}
+      {rightElement && (
         <div className="absolute right-4 flex items-center justify-center">
-          <StarToggle />
+          {rightElement}
         </div>
       )}
     </header>

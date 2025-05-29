@@ -1,6 +1,8 @@
 import React from "react";
 import { useRouter } from "next/router";
 import Head from "next/head";
+import StarToggle from "components/StarToggle";
+import { useEffect, useState } from "react";
 import useLocalStorageQuery from "hooks/useLocalStorageQuery";
 import PageHeader from "components/PageHeader";
 
@@ -8,20 +10,58 @@ export default function MealDetail() {
   const router = useRouter();
   const { id } = router.query;
   const mealId = typeof id === "string" ? id : "";
+  const [isSaved, setIsSaved] = useState(false);
+
   const { data, isLoading, error } = useLocalStorageQuery<any>(
     `themealdb-meal-${mealId}`,
     `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${mealId}`,
     1000 * 60 * 60 // 1 hour
   );
-
   const meal = data?.meals?.[0];
+
+  useEffect(() => {
+    if (!mealId || !meal) return;
+    const savedMeals = JSON.parse(localStorage.getItem("savedMeals") || "[]");
+    setIsSaved(savedMeals.some((m: any) => m.idMeal === mealId));
+  }, [mealId, meal]);
+
+  const handleToggleSaved = (filled: boolean) => {
+    const savedMeals = JSON.parse(localStorage.getItem("savedMeals") || "[]");
+    let updated;
+    if (filled) {
+      // Add full meal object if not present
+      if (!savedMeals.some((m: any) => m.idMeal === mealId)) {
+        updated = [...savedMeals, meal];
+      } else {
+        updated = savedMeals;
+      }
+    } else {
+      // Remove by id
+      updated = savedMeals.filter((m: any) => m.idMeal !== mealId);
+    }
+    localStorage.setItem("savedMeals", JSON.stringify(updated));
+    setIsSaved(filled);
+  };
+
 
   return (
     <>
       <Head>
         <title>{meal ? meal.strMeal : "Loading..."}</title>
       </Head>
-      <PageHeader showBack showStar>{meal ? meal.strMeal : "Loading..."}</PageHeader>
+      <PageHeader
+        showBack
+        rightElement={
+          meal && (
+            <StarToggle
+              filled={isSaved}
+              onToggle={handleToggleSaved}
+            />
+          )
+        }
+      >
+        {meal ? meal.strMeal : "Loading..."}
+      </PageHeader>
       <div className="min-h-screen bg-[#faf7f6] pb-16">
         {isLoading || !meal ? (
           <div className="p-6">Loading...</div>
