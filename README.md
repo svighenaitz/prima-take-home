@@ -115,36 +115,18 @@ Make sure the development server is running in another terminal before executing
 ## Lighthouse Results
 
 ### Performance Audits
-<div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; margin-bottom: 2rem;">
-  <div style="display: flex; flex-direction: column;">
-    <img src="docs/lighthouse/home.png" alt="Home Page Performance" style="width: 100%; height: auto; border-radius: 8px; border: 1px solid #e5e7eb;"/>
-    <p style="text-align: center; margin: 0.5rem 0 0; color: #6b7280; font-size: 0.9rem;">Home Page</p>
-  </div>
-  <div style="display: flex; flex-direction: column;">
-    <img src="docs/lighthouse/search.png" alt="Search Results Performance" style="width: 100%; height: auto; border-radius: 8px; border: 1px solid #e5e7eb;"/>
-    <p style="text-align: center; margin: 0.5rem 0 0; color: #6b7280; font-size: 0.9rem;">Search Results</p>
-  </div>
-  <div style="display: flex; flex-direction: column;">
-    <img src="docs/lighthouse/details.png" alt="Recipe Details Performance" style="width: 100%; height: auto; border-radius: 8px; border: 1px solid #e5e7eb;"/>
-    <p style="text-align: center; margin: 0.5rem 0 0; color: #6b7280; font-size: 0.9rem;">Recipe Details</p>
-  </div>
-  <div style="display: flex; flex-direction: column;">
-    <img src="docs/lighthouse/saved.png" alt="Saved Recipes Performance" style="width: 100%; height: auto; border-radius: 8px; border: 1px solid #e5e7eb;"/>
-    <p style="text-align: center; margin: 0.5rem 0 0; color: #6b7280; font-size: 0.9rem;">Saved Recipes</p>
-  </div>
-</div>
+
+| [<img src="docs/lighthouse/home.png" alt="Home Page Performance" width="100%">](docs/lighthouse/home.png) | [<img src="docs/lighthouse/search.png" alt="Search Results Performance" width="100%">](docs/lighthouse/search.png) |
+|:---:|:---:|
+| *Home Page* | *Search Results* |
+| [<img src="docs/lighthouse/details.png" alt="Recipe Details Performance" width="100%">](docs/lighthouse/details.png) | [<img src="docs/lighthouse/saved.png" alt="Saved Recipes Performance" width="100%">](docs/lighthouse/saved.png) |
+| *Recipe Details* | *Saved Recipes* |
 
 ### Accessibility Audits
-<div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; margin-top: 1rem;">
-  <div style="display: flex; flex-direction: column;">
-    <img src="docs/lighthouse/a11y-home-saved.png" alt="Home & Saved Recipes Accessibility" style="width: 100%; height: auto; border-radius: 8px; border: 1px solid #e5e7eb;"/>
-    <p style="text-align: center; margin: 0.5rem 0 0; color: #6b7280; font-size: 0.9rem;">Home & Saved Recipes</p>
-  </div>
-  <div style="display: flex; flex-direction: column;">
-    <img src="docs/lighthouse/a11y-details.png" alt="Recipe Details Accessibility" style="width: 100%; height: auto; border-radius: 8px; border: 1px solid #e5e7eb;"/>
-    <p style="text-align: center; margin: 0.5rem 0 0; color: #6b7280; font-size: 0.9rem;">Recipe Details</p>
-  </div>
-</div>
+
+| [<img src="docs/lighthouse/a11y-home-saved.png" alt="Home & Saved Recipes Accessibility" width="100%">](docs/lighthouse/a11y-home-saved.png) | [<img src="docs/lighthouse/a11y-details.png" alt="Recipe Details Accessibility" width="100%">](docs/lighthouse/a11y-details.png) |
+|:---:|:---:|
+| *Home & Saved Recipes* | *Recipe Details* |
 
 ## Future Work
 
