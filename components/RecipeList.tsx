@@ -2,7 +2,8 @@ import useLocalStorageQuery from "../hooks/useLocalStorageQuery";
 import React from "react";
 import RecipeGridList from "./RecipeGridList";
 import type { RecipeGridListItem } from "./RecipeGridList";
-import type { Meal, MealsResponse } from "types";
+import type { Meal, MealsResponse } from "../types";
+import { transformMealToGridItem } from "../src/utils/mealTransform";
 
 export interface RecipeListItem {
   title: string;
@@ -21,15 +22,13 @@ export const RecipeList: React.FC<{ query: string; forceLoading?: boolean }> = (
     1000 * 60 * 60 // 1 hour
   );
 
-  let gridData: RecipeGridListItem[] = [];
-  if (data?.meals) {
-    gridData = data.meals.map((meal: Meal) => ({
-      id: meal.idMeal,
-      title: meal.strMeal,
-      desc: meal.strInstructions?.slice(0, 60) + "...",
-      img: meal.strMealThumb,
-    }));
-  }
+  const gridData = data?.meals
+    ? data.meals.map((meal: Meal) => 
+        transformMealToGridItem(meal, { 
+          descMaxLength: 60 
+        })
+      )
+    : [];
 
   if (isLoading || forceLoading) {
     // Show 6 skeleton items

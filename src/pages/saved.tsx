@@ -1,25 +1,19 @@
-import React from 'react';
-import PageHeader from "components/PageHeader";
+import React, { useEffect, useState } from 'react';
 import Head from "next/head";
-import RecipeGridList, { type RecipeGridListItem } from 'components/RecipeGridList';
-import { useEffect, useState } from "react";
+import PageHeader from "components/PageHeader";
+import RecipeGridList from 'components/RecipeGridList';
+import type { Meal } from '../../types';
+import { transformMealToGridItem } from '../utils/mealTransform';
 
-// Define a proper type for meal data
-interface MealData {
-  idMeal: string;
-  strMeal: string;
-  strInstructions?: string;
-  strArea?: string;
-  strCategory?: string;
-  strMealThumb?: string;
-}
+// Define a type that includes all fields needed for the transform function
+type PickedMeal = Pick<Meal, 'idMeal' | 'strMeal' | 'strInstructions' | 'strArea' | 'strCategory' | 'strMealThumb'>;
 
 export default function Saved() {
-  const [savedMeals, setSavedMeals] = useState<MealData[]>([]);
+  const [savedMeals, setSavedMeals] = useState<PickedMeal[]>([]);
 
   useEffect(() => {
     try {
-      const meals = JSON.parse(localStorage.getItem("savedMeals") ?? "[]") as MealData[];
+      const meals = JSON.parse(localStorage.getItem("savedMeals") ?? "[]") as PickedMeal[];
       setSavedMeals(meals);
     } catch (error) {
       console.error("Error parsing saved meals:", error);
@@ -27,14 +21,9 @@ export default function Saved() {
     }
   }, []);
 
-  const gridData: RecipeGridListItem[] = savedMeals.map((meal) => ({
-    id: meal.idMeal,
-    title: meal.strMeal,
-    desc: meal.strInstructions
-      ? meal.strInstructions.slice(0, 80) + (meal.strInstructions.length > 80 ? '...' : '')
-      : [meal.strArea, meal.strCategory].filter(Boolean).join(' • '),
-    img: meal.strMealThumb,
-  }));
+  const gridData = savedMeals.map(meal => 
+    transformMealToGridItem(meal, { descMaxLength: 80 })
+  );
 
   return (
     <>

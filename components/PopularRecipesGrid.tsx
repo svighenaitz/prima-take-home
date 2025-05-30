@@ -2,6 +2,7 @@ import React from "react";
 import type { MealsResponse } from "../types";
 import useLocalStorageQuery from "../hooks/useLocalStorageQuery";
 import RecipeGridList from "./RecipeGridList";
+import { transformMealToGridItem } from "../src/utils/mealTransform";
 
 export interface PopularRecipesGridProps {
   query: string;
@@ -31,12 +32,13 @@ const PopularRecipesGrid: React.FC<PopularRecipesGridProps> = ({ query, scrollSn
   />;
   if (error) return <div className="mb-4 text-red-500">Error loading recipes</div>;
 
-  const gridData = data?.meals?.map((meal) => ({
-    id: meal.idMeal,
-    title: meal.strMeal,
-    desc: "Delicious and easy to make!",
-    img: meal.strMealThumb ? meal.strMealThumb + '/small' : undefined,
-  })) ?? [];
+  const gridData = data?.meals?.map(meal => 
+    transformMealToGridItem(meal, { 
+      descMaxLength: 30,
+      customDescription: "Delicious and easy to make!",
+      appendToImage: '/small'
+    })
+  ) ?? [];
 
   return (
     <RecipeGridList
