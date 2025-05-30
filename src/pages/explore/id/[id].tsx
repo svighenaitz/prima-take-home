@@ -70,11 +70,21 @@ export default function MealDetail() {
           <div className="p-6 text-red-600">Error loading meal.</div>
         ) : (
           <div className="max-w-xl mx-auto p-4">
-            <img
-              src={meal.strMealThumb}
-              alt={meal.strMeal}
-              className="w-full rounded-2xl mb-4 object-cover aspect-video bg-gray-200"
-            />
+            <picture>
+              <source
+                media="(min-width: 1024px)"
+                srcSet={`${meal.strMealThumb}/large`}
+              />
+              <source
+                media="(min-width: 768px)"
+                srcSet={`${meal.strMealThumb}/medium`}
+              />
+              <img
+                src={`${meal.strMealThumb}/small`}
+                alt={meal.strMeal}
+                className="w-full rounded-2xl mb-4 object-cover aspect-video bg-gray-200"
+              />
+            </picture>
             <h1 className="text-2xl font-bold mb-2">{meal.strMeal}</h1>
             <div className="mb-4 text-[#886364]">{meal.strArea} • {meal.strCategory}</div>
             <h2 className="text-lg font-semibold mb-2">Instructions</h2>

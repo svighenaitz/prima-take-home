@@ -37,13 +37,23 @@ const RecipeGridList: React.FC<RecipeGridListProps> = ({ data, scrollSnap = fals
                   aria-label="Loading recipe image"
                 />
               ) : item.img ? (
-                <img
-                  src={item.img}
-                  alt={`Recipe for ${item.title}`}
-                  className="w-20 h-16 rounded-2xl object-cover bg-gray-200"
-                  style={{ display: 'block' }}
-                  loading="lazy"
-                />
+                <picture>
+                  <source
+                    media="(min-width: 1024px)"
+                    srcSet={`${item.img}/large`}
+                  />
+                  <source
+                    media="(min-width: 768px)"
+                    srcSet={`${item.img}/medium`}
+                  />
+                  <img
+                    src={`${item.img}/small`}
+                    alt={`Recipe for ${item.title}`}
+                    className="w-20 h-16 rounded-2xl object-cover bg-gray-200"
+                    style={{ display: 'block' }}
+                    loading="lazy"
+                  />
+                </picture>
               ) : (
                 <div 
                   className="w-20 h-16 rounded-2xl bg-gray-200" 
