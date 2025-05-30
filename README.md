@@ -93,16 +93,9 @@ bun run test
 
 ### Test Results
 
-<div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; align-items: stretch; justify-content: center;">
-  <div style="display: flex; flex-direction: column;">
-    <img src="docs/test/tests.png" alt="Test Results" style="width: 100%; height: 100%; object-fit: contain; border-radius: 8px; border: 1px solid #e5e7eb;"/>
-    <p style="text-align: center; margin-top: 0.5rem; color: #6b7280;">Test Execution Results</p>
-  </div>
-  <div style="display: flex; flex-direction: column;">
-    <img src="docs/test/coverage.png" alt="Test Coverage" style="width: 100%; height: 100%; object-fit: contain; border-radius: 8px; border: 1px solid #e5e7eb;"/>
-    <p style="text-align: center; margin-top: 0.5rem; color: #6b7280;">Code Coverage Report</p>
-  </div>
-</div>
+| [<img src="docs/test/tests.png" alt="Test Execution Results" width="100%">](docs/test/tests.png) | [<img src="docs/test/coverage.png" alt="Code Coverage Report" width="100%">](docs/test/coverage.png) |
+|:---:|:---:|
+| *Test Execution Results* | *Code Coverage Report* |
 
 To run end-to-end tests, use the following command:
 
@@ -116,11 +109,9 @@ Make sure the development server is running in another terminal before executing
 
 ### Performance Audits
 
-| [<img src="docs/lighthouse/home.png" alt="Home Page Performance" width="100%">](docs/lighthouse/home.png) | [<img src="docs/lighthouse/search.png" alt="Search Results Performance" width="100%">](docs/lighthouse/search.png) |
-|:---:|:---:|
-| *Home Page* | *Search Results* |
-| [<img src="docs/lighthouse/details.png" alt="Recipe Details Performance" width="100%">](docs/lighthouse/details.png) | [<img src="docs/lighthouse/saved.png" alt="Saved Recipes Performance" width="100%">](docs/lighthouse/saved.png) |
-| *Recipe Details* | *Saved Recipes* |
+| [<img src="docs/lighthouse/home.png" alt="Home Page Performance" width="100%">](docs/lighthouse/home.png) | [<img src="docs/lighthouse/search.png" alt="Search Results Performance" width="100%">](docs/lighthouse/search.png) | [<img src="docs/lighthouse/details.png" alt="Recipe Details Performance" width="100%">](docs/lighthouse/details.png) | [<img src="docs/lighthouse/saved.png" alt="Saved Recipes Performance" width="100%">](docs/lighthouse/saved.png) |
+|:---:|:---:|:---:|:---:|
+| *Home Page* | *Search Results* | *Recipe Details* | *Saved Recipes* |
 
 ### Accessibility Audits
 
