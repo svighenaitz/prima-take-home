@@ -64,4 +64,79 @@ describe('RecipeGridItem', () => {
     const article = container.querySelector('article');
     expect(article).toHaveClass('custom-class');
   });
+
+  it('renders in loading state when isLoading is true', () => {
+    // Arrange
+    const props = {
+      title: 'Pasta Carbonara',
+      desc: 'A classic Italian pasta dish',
+      isLoading: true,
+    };
+
+    // Act
+    render(<RecipeGridItem {...props} />);
+
+    // Assert
+    expect(screen.getByLabelText('Loading recipe image')).toBeInTheDocument();
+    // Verify that the title and description are not rendered in loading state
+    expect(screen.queryByText('Pasta Carbonara')).not.toBeInTheDocument();
+    expect(screen.queryByText('A classic Italian pasta dish')).not.toBeInTheDocument();
+    // Check for skeleton elements
+    const skeletons = document.querySelectorAll('.animate-pulse');
+    expect(skeletons.length).toBeGreaterThan(0);
+  });
+
+  it('displays time and servings when both are provided', () => {
+    // Arrange
+    const props = {
+      title: 'Pasta Carbonara',
+      desc: 'A classic Italian pasta dish',
+      time: '30 min',
+      servings: '4 servings',
+    };
+
+    // Act
+    render(<RecipeGridItem {...props} />);
+
+    // Assert
+    expect(screen.getByText(/30 min/)).toBeInTheDocument();
+    expect(screen.getByText(/4 servings/)).toBeInTheDocument();
+    // Check for the bullet point separator
+    const paragraph = screen.getByText(/30 min.*4 servings/s);
+    expect(paragraph.textContent).toMatch(/•/);
+  });
+
+  it('does not display time and servings section when neither is provided', () => {
+    // Arrange
+    const props = {
+      title: 'Pasta Carbonara',
+      desc: 'A classic Italian pasta dish',
+    };
+
+    // Act
+    render(<RecipeGridItem {...props} />);
+
+    // Assert
+    const timeServingsText = screen.queryByText(/•/);
+    expect(timeServingsText).not.toBeInTheDocument();
+  });
+
+  it('shows skeleton for time and servings in loading state when they would be shown', () => {
+    // Arrange
+    const props = {
+      title: 'Pasta Carbonara',
+      desc: 'A classic Italian pasta dish',
+      time: '30 min',
+      servings: '4 servings',
+      isLoading: true,
+    };
+
+    // Act
+    render(<RecipeGridItem {...props} />);
+
+    // Assert
+    // Should have at least 3 skeleton elements (image, title, desc) plus one for time/servings
+    const skeletons = document.querySelectorAll('.animate-pulse');
+    expect(skeletons.length).toBeGreaterThanOrEqual(4);
+  });
 });
