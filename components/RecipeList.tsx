@@ -13,12 +13,14 @@ export interface RecipeListItem {
   servings?: string;
 }
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL ?? 'https://www.themealdb.com/api/json/v1/1';
+
 export const RecipeList: React.FC<{ query: string; forceLoading?: boolean }> = ({ query, forceLoading }) => {
   const limit = 6;
   // Fetch recipes from TheMealDB API and cache in localStorage
   const { data, isLoading, error } = useLocalStorageQuery<MealsResponse>(
     `themealdb-search-all-${query}`,
-    `https://www.themealdb.com/api/json/v1/1/search.php?s=${encodeURIComponent(query)}`,
+    `${API_URL}/search.php?s=${encodeURIComponent(query)}`,
     1000 * 60 * 60 // 1 hour
   );
 

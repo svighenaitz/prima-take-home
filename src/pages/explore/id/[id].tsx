@@ -7,6 +7,8 @@ import useLocalStorageQuery from "hooks/useLocalStorageQuery";
 import PageHeader from "components/PageHeader";
 import type { Meal, MealsResponse } from "types";
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL ?? 'https://www.themealdb.com/api/json/v1/1';
+
 export default function MealDetail() {
   const router = useRouter();
   const { id } = router.query;
@@ -15,7 +17,7 @@ export default function MealDetail() {
 
   const { data, isLoading, error } = useLocalStorageQuery<MealsResponse>(
     `themealdb-meal-${mealId}`,
-    `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${mealId}`,
+    `${API_URL}/lookup.php?i=${mealId}`,
     1000 * 60 * 60 // 1 hour
   );
   const meal = data?.meals?.[0];

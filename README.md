@@ -1,29 +1,190 @@
-# Create T3 App
+# Recipe Explorer App
 
-This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
+A modern recipe discovery application that allows users to browse and explore various recipes from different cuisines. Built with Next.js and TypeScript, this app provides a responsive and interactive user experience with features like recipe search, filtering, and detailed recipe views.
 
-## What's next? How do I make an app with this?
+[Giuliano De Ioanni](mailto:giulianodeioannigcp@gmail.com)
 
-We try to keep this project as simple as possible, so you can start with just the scaffolding we set up for you, and add additional things later when they become necessary.
+## Proposed Solution
 
-If you are not familiar with the different technologies used in this project, please refer to the respective docs. If you still are in the wind, please join our [Discord](https://t3.gg/discord) and ask for help.
+I've built a responsive recipe exploration application with the following key features and implementation details:
 
-- [Next.js](https://nextjs.org)
-- [NextAuth.js](https://next-auth.js.org)
-- [Prisma](https://prisma.io)
-- [Drizzle](https://orm.drizzle.team)
-- [Tailwind CSS](https://tailwindcss.com)
-- [tRPC](https://trpc.io)
+### Core Features
+- **Recipe Browsing**: View popular recipes in an attractive grid layout
+- **Responsive Design**: Fully responsive layout that works on all device sizes
+- **Performance Optimized**: Implemented code splitting, image optimization, and efficient data fetching
+- **Type Safety**: Built with TypeScript for better developer experience and code reliability
 
-## Learn More
+### Technical Implementation
+- **Frontend Framework**: Next.js 13+ with App Router for server-side rendering
+- **Styling**: Tailwind CSS for utility-first styling
+- **State Management**: React hooks for local state management
+- **Data Fetching**: Custom React hooks with localStorage caching for better performance
+- **Accessibility**: Built with ARIA labels and semantic HTML for better accessibility
 
-To learn more about the [T3 Stack](https://create.t3.gg/), take a look at the following resources:
+### Key Components
+- `RecipeGridList`: Displays recipes in a responsive grid layout
+- `RecipeGridItem`: Individual recipe card component with hover effects
+- `PopularRecipesGrid`: Shows trending recipes with caching
+- Custom hooks for data fetching and state management
 
-- [Documentation](https://create.t3.gg/)
-- [Learn the T3 Stack](https://create.t3.gg/en/faq#what-learning-resources-are-currently-available) — Check out these awesome tutorials
+## Live Demo
 
-You can check out the [create-t3-app GitHub repository](https://github.com/t3-oss/create-t3-app) — your feedback and contributions are welcome!
+[View Live Demo](https://your-deployed-app-url.vercel.app)
 
-## How do I deploy this?
+## Screenshots
 
-Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
+<div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; align-items: stretch; justify-content: center;">
+  <div style="display: flex; flex-direction: column;">
+    <img src="docs/screenshot1.png" alt="Screenshot 1" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;"/>
+  </div>
+  <div style="display: flex; flex-direction: column;">
+    <img src="docs/screenshot2.png" alt="Screenshot 2" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;"/>
+  </div>
+  <div style="display: flex; flex-direction: column;">
+    <img src="docs/screenshot3.png" alt="Screenshot 3" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;"/>
+  </div>
+</div>
+
+## Assumptions
+
+- The application uses TheMealDB API as the data source
+- Basic knowledge of recipe structure (ingredients, instructions, etc.) is assumed
+- Responsive design targets mobile, tablet, and desktop breakpoints
+- Browser compatibility with modern JavaScript features is assumed
+
+## Libraries & Tools Used
+
+- **Framework**: Next.js 13+
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS
+- **Icons**: React Icons
+- **Linting**: ESLint with TypeScript support
+- **Formatting**: Prettier
+- **State Management**: React Hooks
+- **HTTP Client**: Built-in fetch API
+
+## Setup
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/svighenaitz/prima-take-home.git
+   cd prima-take-home
+   ```
+
+2. Install dependencies:
+   ```bash
+   bun install
+   ```
+
+3. Create a `.env.local` file in the root directory and add the following environment variable:
+   ```bash
+   # .env.local
+   NEXT_PUBLIC_API_URL=https://www.themealdb.com/api/json/v1/1
+   ```
+   
+   This will make the API URL available in your application.
+
+4. Run the development server:
+   ```bash
+   bun run dev
+   ```
+
+5. Open [http://localhost:3000](http://localhost:3000) in your browser
+
+## Running Tests
+
+To run the test suite:
+
+```bash
+bun run test
+```
+
+### Test Results
+
+<div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; align-items: stretch; justify-content: center;">
+  <div style="display: flex; flex-direction: column;">
+    <img src="docs/test/tests.png" alt="Test Results" style="width: 100%; height: 100%; object-fit: contain; border-radius: 8px; border: 1px solid #e5e7eb;"/>
+    <p style="text-align: center; margin-top: 0.5rem; color: #6b7280;">Test Execution Results</p>
+  </div>
+  <div style="display: flex; flex-direction: column;">
+    <img src="docs/test/coverage.png" alt="Test Coverage" style="width: 100%; height: 100%; object-fit: contain; border-radius: 8px; border: 1px solid #e5e7eb;"/>
+    <p style="text-align: center; margin-top: 0.5rem; color: #6b7280;">Code Coverage Report</p>
+  </div>
+</div>
+
+To run end-to-end tests, use the following command:
+
+```bash
+bun run test:e2e
+```
+
+Make sure the development server is running in another terminal before executing the end-to-end tests.
+
+## Lighthouse Results
+
+### Performance Audits
+<div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; margin-bottom: 2rem;">
+  <div style="display: flex; flex-direction: column;">
+    <img src="docs/lighthouse/home.png" alt="Home Page Performance" style="width: 100%; height: auto; border-radius: 8px; border: 1px solid #e5e7eb;"/>
+    <p style="text-align: center; margin: 0.5rem 0 0; color: #6b7280; font-size: 0.9rem;">Home Page</p>
+  </div>
+  <div style="display: flex; flex-direction: column;">
+    <img src="docs/lighthouse/search.png" alt="Search Results Performance" style="width: 100%; height: auto; border-radius: 8px; border: 1px solid #e5e7eb;"/>
+    <p style="text-align: center; margin: 0.5rem 0 0; color: #6b7280; font-size: 0.9rem;">Search Results</p>
+  </div>
+  <div style="display: flex; flex-direction: column;">
+    <img src="docs/lighthouse/details.png" alt="Recipe Details Performance" style="width: 100%; height: auto; border-radius: 8px; border: 1px solid #e5e7eb;"/>
+    <p style="text-align: center; margin: 0.5rem 0 0; color: #6b7280; font-size: 0.9rem;">Recipe Details</p>
+  </div>
+  <div style="display: flex; flex-direction: column;">
+    <img src="docs/lighthouse/saved.png" alt="Saved Recipes Performance" style="width: 100%; height: auto; border-radius: 8px; border: 1px solid #e5e7eb;"/>
+    <p style="text-align: center; margin: 0.5rem 0 0; color: #6b7280; font-size: 0.9rem;">Saved Recipes</p>
+  </div>
+</div>
+
+### Accessibility Audits
+<div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; margin-top: 1rem;">
+  <div style="display: flex; flex-direction: column;">
+    <img src="docs/lighthouse/a11y-home-saved.png" alt="Home & Saved Recipes Accessibility" style="width: 100%; height: auto; border-radius: 8px; border: 1px solid #e5e7eb;"/>
+    <p style="text-align: center; margin: 0.5rem 0 0; color: #6b7280; font-size: 0.9rem;">Home & Saved Recipes</p>
+  </div>
+  <div style="display: flex; flex-direction: column;">
+    <img src="docs/lighthouse/a11y-details.png" alt="Recipe Details Accessibility" style="width: 100%; height: auto; border-radius: 8px; border: 1px solid #e5e7eb;"/>
+    <p style="text-align: center; margin: 0.5rem 0 0; color: #6b7280; font-size: 0.9rem;">Recipe Details</p>
+  </div>
+</div>
+
+## Future Work
+
+1. **Testing**
+   - Add visual regression testing
+
+2. **Performance**
+   - Implement service worker for offline support
+   - Add more aggressive caching strategies
+
+
+3. **Features**
+   - User authentication and saved recipes
+   - Advanced search and filtering
+   - Recipe rating and reviews
+   - Meal planning functionality
+
+4. **Accessibility**
+   - Improve keyboard navigation
+   - Add more ARIA labels and roles
+   - Conduct accessibility audit
+
+5. **Internationalization**
+   - Add multi-language support
+   - Localize dates and numbers
+   - RTL language support
+
+6. **Documentation**
+   - Add Storybook for component documentation
+   - Improve API documentation
+   - Add contribution guidelines
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.

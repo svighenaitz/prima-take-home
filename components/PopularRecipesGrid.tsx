@@ -10,8 +10,10 @@ export interface PopularRecipesGridProps {
   limit?: number;
 }
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL ?? 'https://www.themealdb.com/api/json/v1/1';
+
 const PopularRecipesGrid: React.FC<PopularRecipesGridProps> = ({ query, scrollSnap = false, limit = 6 }) => {
-  const url = `https://www.themealdb.com/api/json/v1/1/filter.php?a=${encodeURIComponent(query)}`;
+  const url = `${API_URL}/filter.php?a=${encodeURIComponent(query)}`;
   const key = `popular-${query.toLowerCase()}`;
   const { data, isLoading, error } = useLocalStorageQuery<MealsResponse>(
     key,
