@@ -33,17 +33,9 @@ I've built a responsive recipe exploration application with the following key fe
 
 ## Screenshots
 
-<div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; align-items: stretch; justify-content: center;">
-  <div style="display: flex; flex-direction: column;">
-    <img src="docs/screenshot1.png" alt="Screenshot 1" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;"/>
-  </div>
-  <div style="display: flex; flex-direction: column;">
-    <img src="docs/screenshot2.png" alt="Screenshot 2" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;"/>
-  </div>
-  <div style="display: flex; flex-direction: column;">
-    <img src="docs/screenshot3.png" alt="Screenshot 3" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;"/>
-  </div>
-</div>
+| [<img src="docs/screenshot1.png" alt="Screenshot 1" width="100%">](docs/screenshot1.png) | [<img src="docs/screenshot2.png" alt="Screenshot 2" width="100%">](docs/screenshot2.png) | [<img src="docs/screenshot3.png" alt="Screenshot 3" width="100%">](docs/screenshot3.png) |
+|:---:|:---:|:---:|
+| *Home Page* | *Search Results* | *Recipe Details* |
 
 ## Assumptions
 
