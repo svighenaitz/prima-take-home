@@ -13,7 +13,7 @@ interface RecipeGridItemProps {
 const RecipeGridItem: React.FC<RecipeGridItemProps> = ({ title, desc, img, time, servings, className, isLoading = false }) => (
   isLoading ? (
     // Skeleton loading state
-    <article className={`flex flex-col ${className ?? ""}`}>
+    <article className={`flex flex-col ${className ?? ""}`} data-testid="recipe-card-loading">
       {/* Skeleton image placeholder */}
       <div 
         className="w-full aspect-square bg-gray-200 mb-1 rounded-2xl animate-pulse" 
@@ -42,7 +42,12 @@ const RecipeGridItem: React.FC<RecipeGridItemProps> = ({ title, desc, img, time,
       )}
     </article>
   ) : (
-  <article className={`flex flex-col ${className ?? ""}`} aria-labelledby={`recipe-title-${title.replace(/\s+/g, '-').toLowerCase()}`}>
+  <article 
+    className={`flex flex-col ${className ?? ""}`} 
+    aria-labelledby={`recipe-title-${title.replace(/\s+/g, '-').toLowerCase()}`}
+    data-testid="recipe-card"
+    data-recipe-id={title.replace(/\s+/g, '-').toLowerCase()}
+  >
     {img ? (
       <img
         src={img}

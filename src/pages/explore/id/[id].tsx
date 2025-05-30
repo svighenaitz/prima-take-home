@@ -63,7 +63,7 @@ export default function MealDetail() {
       >
         {meal ? meal.strMeal : "Loading..."}
       </PageHeader>
-      <div className="min-h-screen bg-[#faf7f6] pb-16">
+      <div className="min-h-screen bg-[#faf7f6] pb-16" data-testid="recipe-detail-page">
         {isLoading || !meal ? (
           <div className="p-6">Loading...</div>
         ) : error ? (

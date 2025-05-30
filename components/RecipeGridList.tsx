@@ -24,7 +24,7 @@ const RecipeGridList: React.FC<RecipeGridListProps> = ({ data, scrollSnap = fals
     return (
       <ul className="list-none p-0 m-0" aria-label="Recipe list">
         {items.map((item) => (
-          <li key={item.id} className="mb-2">
+          <li key={item.id} className="mb-2" data-testid="recipe-card">
             <Link 
               href={`/explore/id/${item.id}`} 
               className="flex items-center gap-4 py-3 hover:bg-gray-50 rounded-lg cursor-pointer transition-colors"
@@ -115,6 +115,7 @@ const RecipeGridList: React.FC<RecipeGridListProps> = ({ data, scrollSnap = fals
             img={item.img}
             className={itemClass + " w-full h-full"}
             isLoading={isLoading}
+            data-testid="recipe-card"
           />          
         </Link>
       ))}
